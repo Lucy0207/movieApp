@@ -1,25 +1,26 @@
+import axios from "axios";
 
-class MovieService {
-    async getResource(url) {
-        const res = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMGNlNjc4NDM1M2FlZTdmZDUyNzc3Y2UwYzM2Y2EyZCIsInN1YiI6IjY1YTEyNWYzZjA0ZDAxMDEyYjc5MTdmMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PCXPpqOfS1VM5CvxNkYyiQ5cFIFIwl3u9EHJwe80S_k',
-                'accept': 'application/json'
-            }
-        });
-        if (!res.ok) {
-            throw new Error(`Couldn't fetch ${url}. Received ${res.status}`)
-        }
-        const body = await res.json();
-        return body;
+const baseURL = "https://api.themoviedb.org/3";
+const API_KEY = "10ce6784353aee7fd52777ce0c36ca2d";
+
+export const moviesApi = axios.create({
+    baseURL: baseURL,
+    headers: {
+        "Content-type": "application/json"
+    },
+    params: {
+        api_key: API_KEY
     }
-    async getAllMovies() {
-        const res = await this.getResource('https://api.themoviedb.org/3/trending/movie/day?language=en-US')
-        return res.results;
+})
+export default class MovieService {
+    async getMovies() {
+        const res = await moviesApi.get(`${baseURL}/search/movie?query=return&include_adult=false&language=en-US&page=1&api_key=${API_KEY}`);
+        return res.data;
     }
 
 }
 
-const movieApp = new MovieService();
-movieApp.getAllMovies().then((body) => console.log(body))
+/*
+const movies = new MovieService();
+movies.getMovies()
+.then((movie) => console.log(movie));*/
