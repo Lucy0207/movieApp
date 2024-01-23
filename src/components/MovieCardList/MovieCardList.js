@@ -36,7 +36,7 @@ constructor() {
     const foundMovies = movies.map((movie) => {
         const {id, ...movieData} = movie;
         return (
-            <li key={id}>
+            <li key={id} className="movieCard">
                 <MovieCard
                     {...movieData}
                 />
@@ -44,7 +44,7 @@ constructor() {
 
         )
     })
-        return <ul>{foundMovies}</ul>
+        return <ul className="moviesList">{foundMovies}</ul>
 
     }
 }
