@@ -18,9 +18,17 @@ export default class MovieService {
         return res.data;
     }
 
+  /*  transformData(data) {
+        return data.map((movie) => ({
+            title: movie.title,
+            date: movie.release_date,
+            genre: movie.genre_ids,
+            description: movie.overview,
+            img: `https://image.tmdb.org/t/p/original${movie.poster_path}`,
+        }))
+
+    }*/
+
 }
 
-/*
-const movies = new MovieService();
-movies.getMovies()
-.then((movie) => console.log(movie));*/
+
