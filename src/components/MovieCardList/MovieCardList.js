@@ -37,7 +37,7 @@ constructor() {
                     date: result.release_date,
                     genre: result.genre_ids,
                     description: result.overview,
-                    img: `https://image.tmdb.org/t/p/original${result.poster_path}`,
+                    "poster_path": result.poster_path,
                 })),
                 loading: false
             });

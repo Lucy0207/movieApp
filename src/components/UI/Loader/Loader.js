@@ -8,6 +8,7 @@ export default class Loader extends React.Component {
         return (
             <Flex align="center" gap="middle">
                 <Spin
+                    className="spinner"
                     size="large"/>
             </Flex>
         )

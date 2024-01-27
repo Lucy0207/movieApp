@@ -1,5 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
+import icon from "./no_image.png";
 
 import "./MovieCard.css";
 
@@ -18,13 +19,15 @@ export default class MovieCard extends React.Component {
 
 
     render() {
-        const {title, date, genre, description, img} = this.props;
+        const {title, date, genre, description, poster_path} = this.props;
         const formattedDate = date ? format(new Date(date), 'MMMM dd, yyyy') : "Unknown release date";
 
         return (
            <>
              <img
-                src={img}
+                src={
+                 poster_path ? `https://image.tmdb.org/t/p/original${poster_path}` : icon
+                }
                 className="movieCard-image image"
                 alt={title}
                 />
