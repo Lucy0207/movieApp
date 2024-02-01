@@ -15,9 +15,8 @@ state = {
    error: false
 }
 
-constructor() {
-    super();
-    this.searchMovies();
+componentDidMount() {
+    this.searchMovies()
 }
 
     onError = (err) => {

@@ -1,12 +1,13 @@
 import React from "react";
-import MovieCardList from "../MovieCardList/MovieCardList";
+
 import "./app.css";
+import Pages from "../Pages/Pages";
 
 export default class App extends React.Component {
     render() {
         return (
             <div className="movieApp">
-            <MovieCardList />
+                <Pages />
             </div>
         )
     }
