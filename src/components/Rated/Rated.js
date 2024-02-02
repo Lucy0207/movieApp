@@ -7,9 +7,9 @@ export default class Rated extends React.Component {
     render() {
         return (
             <>
-
+{/*
                 <MovieCardList />
-                <Pagination />
+                <Pagination />*/}
             </>
         );
     }

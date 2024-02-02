@@ -1,7 +1,11 @@
 .movieApp {
     background: #fff;
-    margin: 100px auto;
+    margin:20px auto;
     max-width: 1010px;
     min-height: 100vh;
     padding: 17px 36px 17px 36px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
