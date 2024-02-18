@@ -7,10 +7,9 @@ import MovieCard from "../MovieCard/MovieCard";
 import "./MovieCardList.css"
 
 export default class MovieCardList extends React.Component {
-movieService = new MovieService();
+
 
 state = {
-   movies: [],
    loading: true,
    error: false
 }
@@ -18,6 +17,12 @@ state = {
 componentDidMount() {
     this.searchMovies()
 }
+
+componentDidUpdate(prevProps) {
+        if (prevProps.movies !== this.props.movies) {
+            this.searchMovies();
+        }
+    }
 
     onError = (err) => {
         this.setState({
@@ -27,22 +32,28 @@ componentDidMount() {
     }
 
     searchMovies = () => {
-        this.movieService.getMovies()
-            .then(({results}) => {
+        const { movies } = this.props;
+        try {
+            const mappedMovies = movies.map((result) => ({
+                id: result.id,
+                title: result.title,
+                date: result.release_date,
+                genre: result.genre_ids,
+                description: result.overview,
+                rating: result.vote_average,
+                "poster_path": result.poster_path,
+            }));
             this.setState({
-                movies: results.map((result) => ({
-                    id: result.id,
-                    title: result.title,
-                    date: result.release_date,
-                    genre: result.genre_ids,
-                    description: result.overview,
-                    "poster_path": result.poster_path,
-                })),
+                movies: mappedMovies,
                 loading: false
             });
-        })
-            .catch(this.onError);
+        } catch (error) {
+            console.error("Error mapping movies:", error);
+            this.onError(error);
+        }
     }
+
+
 
 
     render() {

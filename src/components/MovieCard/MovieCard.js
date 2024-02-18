@@ -1,6 +1,7 @@
 import React from "react";
 import { format } from "date-fns";
 import icon from "./no_image.png";
+import Rating from "../UI/Rating/Rating";
 
 import "./MovieCard.css";
 
@@ -19,7 +20,7 @@ export default class MovieCard extends React.Component {
 
 
     render() {
-        const {title, date, genre, description, poster_path} = this.props;
+        const {title, date, genre, description, rating, poster_path} = this.props;
         const formattedDate = date ? format(new Date(date), 'MMMM dd, yyyy') : "Unknown release date";
 
         return (
@@ -34,9 +35,13 @@ export default class MovieCard extends React.Component {
 
              <div className="movieCard--body">
                     <h2 className="movieCard--title">{title}</h2>
+                    <div className="movieCard--average-rating">
+                        <span className="movieCard--average-rating__text">{rating.toFixed(1)}</span>
+                    </div>
                     <div>{formattedDate}</div>
                     <div>drama</div>
-                    <div>{this.textCut(description, 150)}</div>
+                    <div><span className="movieCard--description">{this.textCut(description, 150)}</span></div>
+                    <Rating />
                 </div>
            </>
 
