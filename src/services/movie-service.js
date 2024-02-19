@@ -25,6 +25,15 @@ export default class MovieService {
         return res.data;
     }
 
+    async getGenres() {
+        const genres = await moviesApi.get('${baseURL}/genre/movie/list', {
+            params: {
+                language: "en"
+            }
+        });
+        return genres.data;
+    }
+
 
 
 }

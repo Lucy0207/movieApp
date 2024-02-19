@@ -21,37 +21,16 @@ export default class Search extends React.Component {
     }
 
 
-    constructor(props) {
-        super(props);
-        this.fetchMoviesDebounced = debounce(this.fetchMovies, 500); // Debounce time of 300 milliseconds
+    componentDidMount() {
+        this.fetchMoviesDebounced = debounce(this.fetchMovies, 500);
     }
 
-    /*handleChange = async (e) => {
-        const value = e.target.value;
-        this.setState({ value });
 
-        try {
-            const movieService = new MovieService();
-            this.setState({ loading: true });
-            const movies = await movieService.getMovies(value);
-            this.setState({
-                movies: movies.results,
-                loading: false,
-                error: false
-            });
-        } catch (error) {
-            console.error("Error fetching movies:", error);
-            this.setState({
-                error: true,
-                loading: false
-            });
-        }
-    }*/
 
     handleChange = (e) => {
         const { value } = e.target;
         this.setState({ value });
-        this.fetchMoviesDebounced(value);
+        this.fetchMoviesDebounced(value, this.state.currentPage);
     };
 
     fetchMovies = async (query, page) => {

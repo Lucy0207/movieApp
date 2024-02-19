@@ -10,5 +10,7 @@ const MoviesPagination = ({current, total, onChange}) =>
     onChange={onChange}
     pageSize={1}
     showSizeChanger={false}
-    className="movies-pagination" />;
+    className="movies-pagination"
+    hideOnSinglePage
+    />;
 export default MoviesPagination;
