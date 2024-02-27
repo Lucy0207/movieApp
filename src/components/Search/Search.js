@@ -63,6 +63,7 @@ export default class Search extends React.Component {
 
     render() {
         const {value, movies, loading, error, totalPages, currentPage} = this.state;
+        const {guestSessionId, onMovieRate} = this.props;
         return (
 
             <>
@@ -77,7 +78,7 @@ export default class Search extends React.Component {
                 </form>
                 {loading && <Loader />}
                 {error && <ErrorIndicator />}
-                <MovieCardList movies={movies} />
+                <MovieCardList movies={movies} guestSessionId={guestSessionId} onMovieRate={onMovieRate} />
                 <MoviesPagination
                 current={currentPage}
                 total={totalPages}

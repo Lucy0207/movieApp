@@ -59,6 +59,7 @@ componentDidUpdate(prevProps) {
     render() {
 
     const {movies, loading, error} = this.state;
+    const {guestSessionId, onMovieRate} = this.props;
         if (error) {
             return <ErrorIndicator />;
         }
@@ -69,12 +70,17 @@ componentDidUpdate(prevProps) {
 
     const foundMovies = movies.map((movie) => {
         const {id, ...movieData} = movie;
+
         return (
 
             <li key={id} className="movieCard">
 
+
                 <MovieCard
+                    movieId={id}
                     {...movieData}
+                    guestSessionId={guestSessionId}
+                    onMovieRate={onMovieRate}
                 />
             </li>
 

@@ -18,9 +18,14 @@ export default class MovieCard extends React.Component {
         return text + "...";
     }
 
+    handleRatingChange = (rating) => {
+        const { movieId, onMovieRate } = this.props;
+        onMovieRate(movieId, rating);
+    };;
+
 
     render() {
-        const {title, date, genre, description, rating, poster_path} = this.props;
+        const {title, date, genre, description, rating, poster_path, guestSessionId, movieId} = this.props;
         const formattedDate = date ? format(new Date(date), 'MMMM dd, yyyy') : "Unknown release date";
 
         return (
@@ -39,9 +44,10 @@ export default class MovieCard extends React.Component {
                         <span className="movieCard--average-rating__text">{rating.toFixed(1)}</span>
                     </div>
                     <div>{formattedDate}</div>
+
                     <div>drama</div>
                     <div><span className="movieCard--description">{this.textCut(description, 150)}</span></div>
-                    <Rating />
+                    <Rating onRateChange={this.handleRatingChange} guestSessionId={guestSessionId} movieId={movieId}/>
                 </div>
            </>
 

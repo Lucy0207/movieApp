@@ -7,10 +7,11 @@ import "./Pages.css"
 
 export default class Pages extends React.Component {
     render() {
+        const {guestSessionId, onMovieRate} = this.props;
         return (
             <>
             <NavBar className="navigation"/>
-            <Search />
+            <Search guestSessionId={guestSessionId} onMovieRate={onMovieRate} />
             <Rated />
             </>
         )
