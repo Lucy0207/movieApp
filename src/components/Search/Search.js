@@ -25,41 +25,46 @@ export default class Search extends React.Component {
         this.fetchMoviesDebounced = debounce(this.fetchMovies, 500);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const { value, currentPage } = this.state;
+        if (prevState.value !== value || prevState.currentPage !== currentPage) {
+            this.fetchMoviesDebounced(value, currentPage);
+        }
+    }
+    fetchMovies = async (query, page) => {
+        try {
+            this.setState({ loading: true });
+            const movieService = new MovieService();
+            const movies = await movieService.getMovies(query, page);
+            const mappedMovies = this.props.onMapMovies(movies.results);
+            this.setState({
+                movies: mappedMovies,
+                totalPages: movies.total_pages
+            });
+        } catch (error) {
+            console.error("Error fetching movies:", error);
+            this.handleError();
+        } finally {
+            this.setState({ loading: false });
+        }
+    };
 
+
+
+    handleError = () => {
+        this.setState({
+            error: true,
+        });
+    };
 
     handleChange = (e) => {
         const { value } = e.target;
         this.setState({ value });
-        this.fetchMoviesDebounced(value, this.state.currentPage);
-    };
-
-    fetchMovies = async (query, page) => {
-        try {
-            const movieService = new MovieService();
-            this.setState({ loading: true });
-            const movies = await movieService.getMovies(query, page);
-            const {results, total_pages} = movies;
-            this.setState({
-                movies: results,
-                loading: false,
-                error: false,
-                totalPages: total_pages,
-                currentPage: page
-            });
-        } catch (error) {
-            console.error("Error fetching movies:", error);
-            this.setState({
-                error: true,
-                loading: false,
-            });
-        }
     };
 
     handlePageChange = (page) => {
-        const { value } = this.state;
-        this.fetchMovies(value, page);
+        this.setState({ currentPage: page });
     };
-
 
     render() {
         const {value, movies, loading, error, totalPages, currentPage} = this.state;

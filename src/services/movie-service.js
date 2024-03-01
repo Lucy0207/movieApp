@@ -42,12 +42,13 @@ export default class MovieService {
         });
         return res.data;
     }
+
     async rateMovies(guestSessionId, movieId, rating) {
         try {
             const res = await moviesApi.post(
                 `${baseURL}/movie/${movieId}/rating`,
 
-                { value: rating },
+                {value: rating},
                 {
                     params: {
                         api_key: API_KEY,
@@ -65,6 +66,22 @@ export default class MovieService {
         }
     }
 
+    async getRatedMovies(guestSessionId) {
+        try {
+            const res = await moviesApi.get(`${baseURL}/guest_session/${guestSessionId}/rated/movies`, {
+                params: {
+                    api_key: API_KEY
+                }
+            });
+            return res.data;
+        } catch (error) {
+            console.error("Error fetching rated movies:", error);
+            throw error;
+        }
+    }
+
 }
+
+
 
 

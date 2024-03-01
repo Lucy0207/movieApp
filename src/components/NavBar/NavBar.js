@@ -1,30 +1,29 @@
 import React from "react";
-import {Tabs} from "antd";
+import { Tabs } from "antd";
+import Search from "../Search/Search";
+import Rated from "../Rated/Rated";
 
-import "./NavBar.css";
+const NavBar = ({ pageTab, onPageTabChange, guestSessionId, onMovieRate, onMapMovies, onGetRatedMovies }) => {
 
-const onChange = (key) => {
-    console.log(key);
+    return (
+        <Tabs
+            defaultActiveKey="Search"
+            centered
+            destroyInactiveTabPane={false}
+            onChange={onPageTabChange}
+        >
+            <Tabs.TabPane tab="Search" key="Search">
+                <Search pageTab={pageTab}
+                        guestSessionId={guestSessionId} onMovieRate={onMovieRate} onMapMovies={onMapMovies}/>
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Rated" key="Rated">
+                <Rated pageTab={pageTab}
+                       onMapMovies={onMapMovies}
+                       onGetRatedMovies={onGetRatedMovies}
+                       guestSessionId={guestSessionId}/>
+            </Tabs.TabPane>
+        </Tabs>
+    );
 };
-const items = [
-    {
-        key: '1',
-        label: 'Search',
 
-    },
-    {
-        key: '2',
-        label: 'Rated',
-
-    },
-
-];
-
-export default class NavBar extends React.Component {
-
-    render() {
-        return (
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange} centered/>
-        )
-    }
-}
+export default NavBar;

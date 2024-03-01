@@ -8,57 +8,9 @@ import "./MovieCardList.css"
 
 export default class MovieCardList extends React.Component {
 
-
-state = {
-   loading: true,
-   error: false
-}
-
-componentDidMount() {
-    this.searchMovies()
-}
-
-componentDidUpdate(prevProps) {
-        if (prevProps.movies !== this.props.movies) {
-            this.searchMovies();
-        }
-    }
-
-    onError = (err) => {
-        this.setState({
-            error: true,
-            loading: false
-        })
-    }
-
-    searchMovies = () => {
-        const { movies } = this.props;
-        try {
-            const mappedMovies = movies.map((result) => ({
-                id: result.id,
-                title: result.title,
-                date: result.release_date,
-                genre: result.genre_ids,
-                description: result.overview,
-                rating: result.vote_average,
-                "poster_path": result.poster_path,
-            }));
-            this.setState({
-                movies: mappedMovies,
-                loading: false
-            });
-        } catch (error) {
-            console.error("Error mapping movies:", error);
-            this.onError(error);
-        }
-    }
-
-
-
-
     render() {
 
-    const {movies, loading, error} = this.state;
+    const {movies, loading, error} = this.props;
     const {guestSessionId, onMovieRate} = this.props;
         if (error) {
             return <ErrorIndicator />;

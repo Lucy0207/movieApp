@@ -27,6 +27,17 @@ export default class MovieCard extends React.Component {
     render() {
         const {title, date, genre, description, rating, poster_path, guestSessionId, movieId} = this.props;
         const formattedDate = date ? format(new Date(date), 'MMMM dd, yyyy') : "Unknown release date";
+        let classNames = "movieCard--average-rating";
+        if (rating >= 0 && rating <= 3) {
+            classNames += " movieCard--average-rating__red "
+        }
+        if (rating > 3 && rating <= 5) {
+            classNames += " movieCard--average-rating__orange "
+        }
+
+        if (rating > 7) {
+            classNames += " movieCard--average-rating__green "
+        }
 
         return (
            <>
@@ -40,7 +51,7 @@ export default class MovieCard extends React.Component {
 
              <div className="movieCard--body">
                     <h2 className="movieCard--title">{title}</h2>
-                    <div className="movieCard--average-rating">
+                    <div className={classNames}>
                         <span className="movieCard--average-rating__text">{rating.toFixed(1)}</span>
                     </div>
                     <div>{formattedDate}</div>
