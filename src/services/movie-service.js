@@ -26,9 +26,10 @@ export default class MovieService {
     }
 
     async getGenres() {
-        const genres = await moviesApi.get('${baseURL}/genre/movie/list', {
+        const genres = await moviesApi.get(`${baseURL}/genre/movie/list`, {
             params: {
-                language: "en"
+                language: "en",
+                api_key: API_KEY
             }
         });
         return genres.data;

@@ -4,17 +4,20 @@ import "./app.css";
 import Pages from "../Pages/Pages";
 import MovieService from "../../services/movie-service";
 import NavBar from "../NavBar/NavBar";
+import {GenreProvider} from "../GenresContext/GenresContext";
 
 export default class App extends React.Component {
 
     state = {
         guestSessionId: "",
-        pageTab: "1"
+        pageTab: "1",
+        genres: []
 
     }
 
     componentDidMount() {
         this.gettingSessionId();
+        this.getMovieGenres();
 
     }
 
@@ -27,6 +30,16 @@ export default class App extends React.Component {
             guestSessionId: guest_session_id
         })
 
+
+    }
+
+    getMovieGenres = async () => {
+        const movieService = new MovieService();
+        const genres = await movieService.getGenres();
+
+        this.setState({
+            genres: genres.genres
+        })
 
     }
 
@@ -54,6 +67,8 @@ export default class App extends React.Component {
                 description: result.overview,
                 rating: result.vote_average,
                 poster_path: result.poster_path,
+                rated: result.rating
+
             }));
             return mappedMovies;
         } catch (error) {
@@ -82,9 +97,10 @@ export default class App extends React.Component {
 
 
     render() {
-        const {guestSessionId, pageTab} = this.state;
+        const {guestSessionId, pageTab, genres} = this.state;
 
         return (
+            <GenreProvider value={genres} >
             <div className="movieApp">
                 <NavBar className="navigation"
                         guestSessionId={guestSessionId}
@@ -97,6 +113,7 @@ export default class App extends React.Component {
                 />
 
             </div>
+            </GenreProvider>
         )
     }
 }

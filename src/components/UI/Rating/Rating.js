@@ -4,7 +4,7 @@ import { Rate } from 'antd';
 
 export default class Rating extends React.Component {
    state= {
-       rating: 0
+       rating: this.props.defaultValue || 0
    }
 
     handleRateChange = (value) => {
@@ -14,6 +14,7 @@ export default class Rating extends React.Component {
     };
 
     render() {
-        return <Rate allowHalf defaultValue={0} count={10} className="movieCard-rate" onChange={this.handleRateChange} allowClear={false}/>;
+        const {rating} = this.state
+        return <Rate allowHalf defaultValue={rating} count={10} className="movieCard-rate" onChange={this.handleRateChange} allowClear={false}/>;
     }
 }

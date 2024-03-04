@@ -2,10 +2,13 @@ import React from "react";
 import { format } from "date-fns";
 import icon from "./no_image.png";
 import Rating from "../UI/Rating/Rating";
+import Genres from "../Genres/Genres";
+
 
 import "./MovieCard.css";
 
 export default class MovieCard extends React.Component {
+
 
    textCut = (text, limit) => {
         text = text.trim();
@@ -21,11 +24,14 @@ export default class MovieCard extends React.Component {
     handleRatingChange = (rating) => {
         const { movieId, onMovieRate } = this.props;
         onMovieRate(movieId, rating);
-    };;
+
+    };
 
 
     render() {
-        const {title, date, genre, description, rating, poster_path, guestSessionId, movieId} = this.props;
+        const {title, date, genre, description, rating, poster_path, guestSessionId, movieId, rated} = this.props;
+
+
         const formattedDate = date ? format(new Date(date), 'MMMM dd, yyyy') : "Unknown release date";
         let classNames = "movieCard--average-rating";
         if (rating >= 0 && rating <= 3) {
@@ -39,7 +45,14 @@ export default class MovieCard extends React.Component {
             classNames += " movieCard--average-rating__green "
         }
 
+        let titleNames = "movieCard--title";
+        if (title.length > 40) {
+            titleNames += " movieCard--title__small"
+        }
+
+
         return (
+
            <>
              <img
                 src={
@@ -50,17 +63,18 @@ export default class MovieCard extends React.Component {
                 />
 
              <div className="movieCard--body">
-                    <h2 className="movieCard--title">{title}</h2>
+                    <h2 className={titleNames}>{title}</h2>
                     <div className={classNames}>
                         <span className="movieCard--average-rating__text">{rating.toFixed(1)}</span>
                     </div>
-                    <div>{formattedDate}</div>
+                    <div className="movieCard--date">{formattedDate}</div>
 
-                    <div>drama</div>
+                    <div><Genres genresArray={genre} /></div>
                     <div><span className="movieCard--description">{this.textCut(description, 150)}</span></div>
-                    <Rating onRateChange={this.handleRatingChange} guestSessionId={guestSessionId} movieId={movieId}/>
+                    <Rating onRateChange={this.handleRatingChange} guestSessionId={guestSessionId} movieId={movieId} defaultValue = {rated}/>
                 </div>
            </>
+
 
         )
     }

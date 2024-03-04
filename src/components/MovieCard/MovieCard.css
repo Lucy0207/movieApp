@@ -31,6 +31,14 @@
     font-size: 20px;
     font-weight: 400;
     line-height: 28px;
+    color: rgb(0, 0, 0);
+    font-family: Inter, sans-serif;
+   letter-spacing: 0;
+    text-align: left;
+}
+
+.movieCard--title__small {
+    font-size: 14px;
 }
 
 .movieCard--description {
@@ -63,4 +71,14 @@
     left: 8px;
     top: 7px;
     font-size: 12px;
+}
+
+.movieCard--date {
+    color: rgb(130, 126, 126);
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
 }

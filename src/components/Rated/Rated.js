@@ -45,8 +45,10 @@ export default class Rated extends React.Component {
         }
     };
 
+
+
     render() {
-        const { movies, loading, error } = this.state;
+        const { movies, loading, error, totalPages, currentPage } = this.state;
 
 
         if (error) {
@@ -66,7 +68,9 @@ export default class Rated extends React.Component {
             <>
 
                 <MovieCardList movies={this.state.movies} />
-                <MoviesPagination />
+                <MoviesPagination
+
+                    />
             </>
         );
     }

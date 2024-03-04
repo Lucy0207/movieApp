@@ -85,6 +85,7 @@ export default class Search extends React.Component {
                 {error && <ErrorIndicator />}
                 <MovieCardList movies={movies} guestSessionId={guestSessionId} onMovieRate={onMovieRate} />
                 <MoviesPagination
+
                 current={currentPage}
                 total={totalPages}
                 onChange={this.handlePageChange}/>
