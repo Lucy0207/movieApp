@@ -5,24 +5,23 @@ import Rated from "../Rated/Rated";
 
 const NavBar = ({ pageTab, onPageTabChange, guestSessionId, onMovieRate, onMapMovies, onGetRatedMovies }) => {
 
+    const tabsItems = [
+        {
+            key: 'Search',
+            label: 'Search',
+            children: <Search pageTab={pageTab} guestSessionId={guestSessionId} onMovieRate={onMovieRate} onMapMovies={onMapMovies} />
+        },
+        {
+            key: 'Rated',
+            label: 'Rated',
+            children: <Rated pageTab={pageTab} onMapMovies={onMapMovies} onGetRatedMovies={onGetRatedMovies} guestSessionId={guestSessionId} />
+        }
+    ];
+
+
+
     return (
-        <Tabs
-            defaultActiveKey="Search"
-            centered
-            destroyInactiveTabPane={false}
-            onChange={onPageTabChange}
-        >
-            <Tabs.TabPane tab="Search" key="Search">
-                <Search pageTab={pageTab}
-                        guestSessionId={guestSessionId} onMovieRate={onMovieRate} onMapMovies={onMapMovies}/>
-            </Tabs.TabPane>
-            <Tabs.TabPane tab="Rated" key="Rated">
-                <Rated pageTab={pageTab}
-                       onMapMovies={onMapMovies}
-                       onGetRatedMovies={onGetRatedMovies}
-                       guestSessionId={guestSessionId}/>
-            </Tabs.TabPane>
-        </Tabs>
+        <Tabs defaultActiveKey="Search" centered items={tabsItems} onChange={onPageTabChange} />
     );
 };
 

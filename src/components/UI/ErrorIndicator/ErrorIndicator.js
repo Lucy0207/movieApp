@@ -6,22 +6,17 @@ import "./ErrorIndicator.css";
 const onClose = (e) => {
     console.log(e, 'I was closed.');
 };
-const ErrorIndicator = () => (
+const ErrorIndicator = ({description}) => (
     <Space
         direction="vertical"
         style={{
             width: '100%',
         }}
     >
-       {/* <Alert
-            message="Warning Text Warning Text Warning TextW arning Text Warning Text Warning TextWarning Text"
-            type="warning"
-            closable
-            onClose={onClose}
-        />*/}
+
         <Alert
-            message="Oooops, we're soooo sorry"
-            description="An error has occurred but we're trying to fix it. Bear with us"
+
+            description={description}
             type="error"
             closable
             onClose={onClose}

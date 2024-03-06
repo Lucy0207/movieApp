@@ -16,26 +16,36 @@ export default class Rated extends React.Component {
         totalPages: 1
     }
 
+
     async componentDidMount() {
         try {
-            await this.fetchMovies();
+            await this.fetchMovies(this.state.currentPage);
         } catch (error) {
             console.error("Error mounting Rated component:", error);
+            this.handleError();
         }
     }
 
+    handleError = () => {
+        this.setState({
+            error: true,
+        });
+    };
 
 
-    fetchMovies = async () => {
+    fetchMovies = async (page) => {
         try {
             const {guestSessionId, onMapMovies} = this.props;
             this.setState({ loading: true });
             const movieService = new MovieService();
-            const movies = await movieService.getRatedMovies(guestSessionId);
+            const movies = await movieService.getRatedMovies(guestSessionId, page);
             const mappedMovies = onMapMovies(movies.results);
             this.setState({
                 movies: mappedMovies,
-                totalPages: movies.total_pages
+                totalPages: movies.total_pages,
+                currentPage: page,
+                loading: false,
+                error: false
             });
         } catch (error) {
             console.error("Error fetching movies:", error);
@@ -44,6 +54,11 @@ export default class Rated extends React.Component {
             this.setState({ loading: false });
         }
     };
+
+    handlePageChange = (page) => {
+        this.fetchMovies(page);
+    };
+
 
 
 
@@ -62,14 +77,16 @@ export default class Rated extends React.Component {
 
 
         if (!movies || movies.length === 0) {
-            return <div>No rated movies available.</div>;
+            return <ErrorIndicator description="There are no rated movies"/>;
         }
         return (
             <>
 
                 <MovieCardList movies={this.state.movies} />
                 <MoviesPagination
-
+                    current={currentPage}
+                    total={totalPages}
+                    onChange={this.handlePageChange}
                     />
             </>
         );

@@ -63,13 +63,27 @@ export default class MovieCard extends React.Component {
                 />
 
              <div className="movieCard--body">
-                    <h2 className={titleNames}>{title}</h2>
-                    <div className={classNames}>
-                        <span className="movieCard--average-rating__text">{rating.toFixed(1)}</span>
-                    </div>
-                    <div className="movieCard--date">{formattedDate}</div>
+                 <div className="movieCard--header">
+                     <img
+                         src={
+                             poster_path ? `https://image.tmdb.org/t/p/original${poster_path}` : icon
+                         }
+                         className="image movieCard-image__small"
+                         alt={title}
+                     />
+                     <div className="movieCard--header-content">
+                         <h2 className={titleNames}>{title}</h2>
+                         <div className={classNames}>
+                             <span className="movieCard--average-rating__text">{rating.toFixed(1)}</span>
+                         </div>
+                         <div className="movieCard--date">{formattedDate}</div>
+                         <div><Genres genresArray={genre} /></div>
+                     </div>
 
-                    <div><Genres genresArray={genre} /></div>
+
+
+                 </div>
+
                     <div><span className="movieCard--description">{this.textCut(description, 150)}</span></div>
                     <Rating onRateChange={this.handleRatingChange} guestSessionId={guestSessionId} movieId={movieId} defaultValue = {rated}/>
                 </div>

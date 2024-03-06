@@ -1,24 +1,39 @@
 import React from "react";
 
 import "./app.css";
-import Pages from "../Pages/Pages";
+
 import MovieService from "../../services/movie-service";
 import NavBar from "../NavBar/NavBar";
 import {GenreProvider} from "../GenresContext/GenresContext";
+import ErrorIndicator from "../UI/ErrorIndicator/ErrorIndicator";
 
 export default class App extends React.Component {
 
     state = {
         guestSessionId: "",
-        pageTab: "1",
-        genres: []
+        pageTab: "Search",
+        genres: [],
+        isOnline: navigator.onLine
 
     }
 
     componentDidMount() {
         this.gettingSessionId();
         this.getMovieGenres();
+        window.addEventListener('online', this.handleOnlineStatus);
+        window.addEventListener('offline', this.handleOnlineStatus);
 
+    }
+
+
+    componentWillUnmount() {
+
+        window.removeEventListener('online', this.handleOnlineStatus);
+        window.removeEventListener('offline', this.handleOnlineStatus);
+    }
+
+    handleOnlineStatus = () => {
+        this.setState({ isOnline: navigator.onLine });
     }
 
     gettingSessionId = async () => {
@@ -50,7 +65,7 @@ export default class App extends React.Component {
 
             const movieService = new MovieService();
             await movieService.rateMovies(guestSessionId, movieId, rating);
-            console.log("Movie rated successfully.");
+
         } catch (error) {
             console.error("Error rating movie:", error);
 
@@ -73,7 +88,6 @@ export default class App extends React.Component {
             return mappedMovies;
         } catch (error) {
             console.error("Error mapping movies:", error);
-            // this.handleError();
             return [];
         }
     };
@@ -97,11 +111,12 @@ export default class App extends React.Component {
 
 
     render() {
-        const {guestSessionId, pageTab, genres} = this.state;
+        const {guestSessionId, pageTab, genres, isOnline} = this.state;
 
         return (
             <GenreProvider value={genres} >
             <div className="movieApp">
+                {!isOnline && <ErrorIndicator description="You are offline. Please check your Internet connection" />}
                 <NavBar className="navigation"
                         guestSessionId={guestSessionId}
                         onMovieRate={this.postingMovieRating}
