@@ -1,11 +1,11 @@
 .movieCard-rate {
-    font-size: 16px;
-    margin-top: auto;
+  font-size: 16px;
+  margin-top: auto;
 }
 
 @media only screen and (max-width: 480px) {
-    .movieCard-rate {
-        margin-top: 20px;
-        margin-left: auto;
-    }
+  .movieCard-rate {
+    margin-top: 20px;
+    margin-left: auto;
+  }
 }

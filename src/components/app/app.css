@@ -1,15 +1,15 @@
 .movieApp {
-    background-color: #fff;
-    height: 100%;
-    margin: 0 auto;
-    min-height: 100vh;
-    padding: 22px 32px;
-    width: 1010px;
+  background-color: #fff;
+  height: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 22px 32px;
+  width: 1010px;
 }
 
 @media only screen and (max-width: 480px) {
-    .movieApp {
-      width: 100%;
-      padding: 20px 10px;
-      }
+  .movieApp {
+    width: 100%;
+    padding: 20px 10px;
+  }
 }

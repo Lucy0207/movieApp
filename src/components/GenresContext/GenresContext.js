@@ -1,6 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const {Provider: GenreProvider,
-    Consumer: GenreConsumer} = React.createContext();
+const { Provider: GenreProvider, Consumer: GenreConsumer } = React.createContext();
 
-export {GenreProvider, GenreConsumer}
+export { GenreProvider, GenreConsumer };

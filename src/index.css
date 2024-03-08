@@ -1,22 +1,22 @@
 @font-face {
-    font-family: 'Inter';
-    src: url('./fonts/Inter-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-* , body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
+*,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 #root {
-    width: 100%;
-    min-height: 100%;
-    background-color: #f7f7f7;
-    font-family: 'Inter', sans-serif;
+  width: 100%;
+  min-height: 100%;
+  background-color: #f7f7f7;
+  font-family: 'Inter', sans-serif;
 }
 li {
-    list-style-type: none;
+  list-style-type: none;
 }

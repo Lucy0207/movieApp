@@ -3,19 +3,9 @@
     "browser": true,
     "es2021": true
   },
-  "ignorePatterns": ["node_modules", "dist", "build"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:airbnb/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:prettier/recommended"
-  ],
-  "parser": "@babel/eslint-parser",
+
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
