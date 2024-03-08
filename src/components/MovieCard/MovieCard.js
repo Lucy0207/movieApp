@@ -1,9 +1,10 @@
 import React from 'react';
 import { format } from 'date-fns';
-import icon from './no_image.png';
+
 import Rating from '../UI/Rating/Rating';
 import Genres from '../Genres/Genres';
 
+import icon from './no_image.png';
 import './MovieCard.css';
 
 export default class MovieCard extends React.Component {

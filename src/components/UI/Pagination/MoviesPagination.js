@@ -1,6 +1,5 @@
 import React from 'react';
 import './MoviesPagination.css';
-
 import { Pagination } from 'antd';
 
 const MoviesPagination = ({ current, total, onChange }) => (

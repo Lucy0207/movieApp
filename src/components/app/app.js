@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './app.css';
-
 import MovieService from '../../services/movie-service';
 import NavBar from '../NavBar/NavBar';
 import { GenreProvider } from '../GenresContext/GenresContext';

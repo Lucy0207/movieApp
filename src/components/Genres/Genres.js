@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { GenreConsumer } from '../GenresContext/GenresContext';
 
 import './Genres.css';

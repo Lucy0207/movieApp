@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Rated.css';
 import MovieCardList from '../MovieCardList/MovieCardList';
 import MoviesPagination from '../UI/Pagination/MoviesPagination';

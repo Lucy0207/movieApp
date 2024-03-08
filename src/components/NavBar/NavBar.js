@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tabs } from 'antd';
+
 import Search from '../Search/Search';
 import Rated from '../Rated/Rated';
 

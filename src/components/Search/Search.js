@@ -1,12 +1,12 @@
 import React from 'react';
 import './Search.css';
+import { debounce } from 'lodash';
+
 import MovieCardList from '../MovieCardList/MovieCardList';
 import MoviesPagination from '../UI/Pagination/MoviesPagination';
 import MovieService from '../../services/movie-service';
 import Loader from '../UI/Loader/Loader';
 import ErrorIndicator from '../UI/ErrorIndicator/ErrorIndicator';
-import { debounce } from 'lodash';
-
 export default class Search extends React.Component {
   state = {
     value: '',

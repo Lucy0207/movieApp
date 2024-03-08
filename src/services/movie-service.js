@@ -45,25 +45,21 @@ export default class MovieService {
   }
 
   async rateMovies(guestSessionId, movieId, rating) {
-    try {
-      const res = await moviesApi.post(
-        `${baseURL}/movie/${movieId}/rating`,
+    const res = await moviesApi.post(
+      `${baseURL}/movie/${movieId}/rating`,
 
-        { value: rating },
-        {
-          params: {
-            api_key: API_KEY,
-            guest_session_id: guestSessionId,
-          },
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      return res.data;
-    } catch (error) {
-      throw error;
-    }
+      { value: rating },
+      {
+        params: {
+          api_key: API_KEY,
+          guest_session_id: guestSessionId,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    return res.data;
   }
 
   async getRatedMovies(guestSessionId) {

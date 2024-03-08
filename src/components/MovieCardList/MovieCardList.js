@@ -1,8 +1,7 @@
 import React from 'react';
-import MovieService from '../../services/movie-service';
+
 import Loader from '../UI/Loader/Loader';
 import ErrorIndicator from '../UI/ErrorIndicator/ErrorIndicator';
-
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieCardList.css';
 
